@@ -1,0 +1,24 @@
+#ifndef HPP_FLECTO_CORBA_IDL
+# define HPP_FLECTO_STEP_CORBA_IDL
+
+module hpp {
+  /// Corba exception travelling through the Corba channel
+  exception Error
+  {
+    string msg;
+  };
+  /// Robot configuration is defined by a sequence of dof value.
+  typedef sequence<float> floatSeq;
+  typedef sequence<floatSeq> floatSeqSeq;
+
+  module corbaserver {
+  module flecto {
+  interface rod {
+    /// convert a vector in R6 to an array of capsules (geometry of the rod)
+    floatSeqSeq convertAtoQ (in floatSeq a) raises (Error);
+  }; //interface Problem
+  }; // module wholebody_step
+  }; // module corbaserver
+}; // module hpp
+
+#endif // HPP_WHOLEBODY_STEP_CORBA_IDL
