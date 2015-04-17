@@ -34,11 +34,11 @@ namespace hpp {
     {
     public:
       Server (int argc, char *argv[], bool multiThread = false,
-          const std::string& poaName = "child");
+          const std::string& poaName = "childFlecto");
       ~Server ();
 
       /// Set planner that will be controlled by server
-      void setProblemSolver (ProblemSolverPtr_t problemSolver);
+      //void setProblemSolver (ProblemSolverPtr_t problemSolver);
       /// Start corba server
 
       /// Call hpp::corba::Server <impl::Rod>::startCorbaServer

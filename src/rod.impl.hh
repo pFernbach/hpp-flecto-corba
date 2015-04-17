@@ -23,17 +23,17 @@
 # include <omniORB4/CORBA.h>
 # include <hpp/core/problem-solver.hh>
 # include <hpp/corbaserver/flecto/fwd.hh>
-
+# include "Rod.hh"
 
 namespace hpp {
   namespace flecto {
     namespace impl {
-      class Rod : public virtual
-      POA_hpp::corbaserver::flecto::Rod
+      class Rod : public virtual POA_hpp::corbaserver::flecto::Rod
       {
       public:
         Rod ();
-        hpp::floatSeqSeq* Rod::convertAtoQ (const hpp::floatSeq& a) throw (hpp::Error);
+        hpp::floatSeqSeq* convertAtoQ (const hpp::floatSeq& a) throw (hpp::Error);
+       // void setProblemSolver (const ProblemSolverPtr_t& problemSolver);
       }; // class rod
     } // namespace impl
   } // namespace flecto

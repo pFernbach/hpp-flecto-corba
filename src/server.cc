@@ -18,8 +18,8 @@
 // <http://www.gnu.org/licenses/>.
 
 #include <hpp/util/exception.hh>
-#include "hpp/corbaserver/wholebody-step/server.hh"
-#include "problem.impl.hh"
+#include "hpp/corbaserver/flecto/server.hh"
+#include "rod.impl.hh"
 
 namespace hpp {
   namespace flecto {
@@ -31,10 +31,10 @@ namespace hpp {
     Server::~Server () { delete impl_;}
 
 
-    void Server::setProblemSolver (ProblemSolverPtr_t problemSolver)
+   /* void Server::setProblemSolver (ProblemSolverPtr_t problemSolver)
     {
       impl_->implementation ().setProblemSolver (problemSolver);
-    }
+    }*/
 
     /// Start corba server
     void Server::startCorbaServer(const std::string& contextId,

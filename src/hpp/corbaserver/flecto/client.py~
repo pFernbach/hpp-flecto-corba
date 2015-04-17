@@ -18,7 +18,7 @@
 from omniORB import CORBA
 import CosNaming
 
-from hpp.corbaserver.flecto import Robot
+from hpp.corbaserver.flecto import Rod
 
 class CorbaError(Exception):
     """
@@ -29,11 +29,11 @@ class CorbaError(Exception):
     def __str__(self):
         return repr(self.value)
 
-class Client:
+class Client(object):
   """
-  Connect and create clients for hpp-wholebody-step-planner library.
+  Connect and create clients for hpp-flecto-planner library.
   """
-  def __init__(self):
+  def __init__(self,viewer):
     """
     Initialize CORBA and create default clients.
     """
@@ -52,7 +52,7 @@ class Client:
     except CosNaming.NamingContext.NotFound, ex:
         raise CorbaError ('failed to find flecto service.')
     try:
-        client = obj._narrow (Robot)
+        client = obj._narrow (Rod)
     except KeyError:
         raise CorbaError ('invalid service name flecto')
 
@@ -60,4 +60,6 @@ class Client:
       # This happens when stubs from client and server are not synchronized.
         raise CorbaError (
             'failed to narrow client for service flecto')
-    self.robot = client
+    self.rod = client
+    
+

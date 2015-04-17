@@ -1,6 +1,6 @@
 SET(IDL_SOURCES
   #mettre le nom du fichier dans idl/hpp/corbaserver sans le .py
-  rod
+  Rod
   )
 
 INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
@@ -15,11 +15,12 @@ ADD_LIBRARY(${LIBRARY_NAME}
   server.cc
   rod.impl.hh
   rod.impl.cc
-  ${CMAKE_CURRENT_BINARY_DIR}/hpp/corbaserver/flecto/rod_idl.py
+  RodSK.cc
+  ${CMAKE_CURRENT_BINARY_DIR}/hpp/corbaserver/flecto/Rod_idl.py
 )
 
 #PKG_CONFIG_USE_DEPENDENCY(${LIBRARY_NAME} hpp-flecto)
-#PKG_CONFIG_USE_DEPENDENCY(${LIBRARY_NAME} hpp-template-corba)
+PKG_CONFIG_USE_DEPENDENCY(${LIBRARY_NAME} hpp-template-corba)
 PKG_CONFIG_USE_DEPENDENCY(${LIBRARY_NAME} hpp-util)
 
 INSTALL(TARGETS ${LIBRARY_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -60,15 +61,20 @@ INSTALL(
 INSTALL(
   FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/client.py
+  ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/flectoViewer.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/flecto
   )
-
+#install(FILES
+#  hpp/corbaserver/flecto.py
+#  hpp/corbaserver/__init__.py
+#  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver
+#  )
 # Standalone corba server
 ADD_EXECUTABLE (hpp-flecto-server hpp-flecto-corba.cc)
 TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME})
 #PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-flecto)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-corbaserver)
-#PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-template-corba)
+PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-template-corba)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-util)
 
 INSTALL (TARGETS hpp-flecto-server DESTINATION ${CMAKE_INSTALL_BINDIR})

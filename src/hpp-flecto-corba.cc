@@ -13,18 +13,18 @@ typedef hpp::core::ProblemSolver ProblemSolver;
 int
 main (int argc, char* argv[])
 {
-  Eigen::internal::set_is_malloc_allowed (true);
+  //Eigen::internal::set_is_malloc_allowed (true);
   ProblemSolverPtr_t problemSolver = new ProblemSolver;
   CorbaServer corbaServer (problemSolver, argc,
                const_cast<const char**> (argv), false);
   FlectoServer flectoServer (argc, argv, false);
-  flectoServer.setProblemSolver (problemSolver);
+  //flectoServer.setProblemSolver (problemSolver);
 
   try {
     corbaServer.startCorbaServer ();
     hppDout (info, "successfully start hpp-corbaserver");
   } catch (const std::exception& exc) {
-    hppDout (error, "Faile to start hpp-corbaserver");
+    hppDout (error, "Failed to start hpp-corbaserver");
   }
   try {
     flectoServer.startCorbaServer ("hpp", "corbaserver",
