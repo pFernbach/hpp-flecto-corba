@@ -14,6 +14,7 @@ SET(PROJECT_URL "")
 SET(${PROJECT_NAME}_HEADERS
    include/hpp/corbaserver/flecto/server.hh
    include/hpp/corbaserver/flecto/fwd.hh
+   include/hpp/corbaserver/flecto/node-rod.hh
 )
 SET(CUSTOM_HEADER_DIR hpp/corbaserver/flecto)
 
@@ -25,10 +26,12 @@ IF (HPP_DEBUG)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
 ENDIF()
 
+ADD_REQUIRED_DEPENDENCY("gepetto-viewer")
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 3")
 #ADD_REQUIRED_DEPENDENCY("hpp-flecto >= 3") A enlever apres
 ADD_REQUIRED_DEPENDENCY("hpp-template-corba >= 1.1")
 ADD_REQUIRED_DEPENDENCY("hpp-util >= 3")
+
 # This dependency ensures us that the intermediate __init__.py files are
 # already installed.
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 2.1")

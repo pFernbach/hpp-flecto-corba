@@ -16,6 +16,7 @@ ADD_LIBRARY(${LIBRARY_NAME}
   rod.impl.hh
   rod.impl.cc
   RodSK.cc
+  node-rod.cc
   ${CMAKE_CURRENT_BINARY_DIR}/hpp/corbaserver/flecto/Rod_idl.py
 )
 
@@ -61,7 +62,7 @@ INSTALL(
 INSTALL(
   FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/client.py
-  ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/flecto.py
+  ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/flectoViewer.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/flecto
   )
 #install(FILES
@@ -74,6 +75,7 @@ ADD_EXECUTABLE (hpp-flecto-server hpp-flecto-corba.cc)
 TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME})
 #PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-flecto)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-corbaserver)
+PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server gepetto-viewer)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-template-corba)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-util)
 
