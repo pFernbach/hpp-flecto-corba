@@ -4,7 +4,7 @@
 #include <gepetto/viewer/group-node.h>
 #include <gepetto/viewer/leaf-node-capsule.h>
 
-
+namespace hpp{
 namespace flecto {
 
     DEF_CLASS_SMART_PTR(NodeRod)
@@ -21,6 +21,16 @@ namespace flecto {
         public:
             static NodeRodPtr_t create(const std::string& name);
 
+            virtual bool addChild (::graphics::LeafNodeCapsulePtr_t child_ptr);
+
+            /** Remove a GraphicalObject from the list
+             */
+            virtual bool removeChild (::graphics::LeafNodeCapsulePtr_t child_ptr);
+
+            virtual graphics::LeafNodeCapsulePtr_t getChild(size_t i);
+
+
     };
 } //namespace
+} //namespace hpp
 #endif // ROD_HH

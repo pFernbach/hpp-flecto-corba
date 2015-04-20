@@ -60,6 +60,13 @@ INSTALL(
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/__init__.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/flecto
   )
+  
+  install (FILES
+  hpp/corbaserver/rod/robot_rod.py
+  hpp/corbaserver/rod/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/rod)
+  
+  
 INSTALL(
   FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/client.py

@@ -20,15 +20,17 @@
 #include <cassert>
 #include <hpp/util/debug.hh>
 #include "rod.impl.hh"
+
 // include qserl
 
 
 namespace hpp {
   namespace flecto {
     namespace impl {
-    //todo ?
-    Rod::Rod()
-    {}
+
+    Rod::Rod():rods_()
+    {
+    }
 
 
     //TODO methode avec qSerl :
@@ -43,6 +45,15 @@ namespace hpp {
         throw hpp::Error (exc.what ());
       }
       return q;
+    }
+
+    bool Rod::createRod (const char* rodNameCorba)throw (Error)
+    {
+        try {
+          //TODO
+        } catch (const std::exception& exc) {
+            throw Error (exc.what ());
+        }
     }
 
     } // namespace impl
