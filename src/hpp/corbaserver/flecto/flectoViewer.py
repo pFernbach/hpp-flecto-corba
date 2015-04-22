@@ -37,20 +37,29 @@ class FlectoViewer(Viewer):
       self.client.gui.createGroup(nameRod)
       totalLength = totalLength +0.0 #cast to float
       for i in range(0,self.rod.getRodMaxCapsule(nameRod)) :
-        self.client.gui.addCapsule(self.rod.getRodCapsule(nameRod,i),radius,(totalLength/maxCaspule),color)
+       #creer capsule de taille unitaire pour etre rescale ensuite seulement en longueur
+        self.client.gui.addCapsule(self.rod.getRodCapsule(nameRod,i),radius,totalLength/maxCaspule,color)
         self.client.gui.addToGroup(self.rod.getRodCapsule(nameRod,i),nameRod)   
       self.client.gui.addToGroup(nameRod,self.sceneName)
       return True
         
         
-    def applyRodConfiguration(self,nameRod,q_list):
+    # q_list est un ensemble de vecteur 8 : le premier param est la longueur de la capsule, les autres sont sa configuration (3 pos + 4 quat), les quarternions sont selon la convention mathematique : oriente en X+
+    # pretty : boolean pour indiquer si l'on veux un affichage lisse (True) ou exacte mathematiquement (False)
+    def applyRodConfiguration(self,nameRod,q_list,pretty):
       self.setDisplayedCapsule(nameRod,len(q_list))
-      length = (self.rod.getRodTotalLength(nameRod) +0.0)/self.rod.getRodMaxCapsule(nameRod)
-      
+      #length = (self.rod.getRodTotalLength(nameRod) +0.0)/self.rod.getRodMaxCapsule(nameRod)
       for i in range (0,len(q_list)):
-        self.client.gui.applyConfiguration(self.rod.getRodCapsule(nameRod,i),self.rod.convertToOSG(q_list[i],length))
+        self.client.gui.resizeCapsule(self.rod.getRodCapsule(nameRod,i),q_list[i][0])
+        #self.client.gui.setScale(self.rod.getRodCapsule(nameRod,i),[1,1]+[q_list[i][0]])
+        if pretty == True :
+          self.client.gui.applyConfiguration(self.rod.getRodCapsule(nameRod,i),self.rod.convertToOSG(q_list[i][1:8],0))
+        else: 
+          self.client.gui.applyConfiguration(self.rod.getRodCapsule(nameRod,i),self.rod.convertToOSG(q_list[i][1:8],q_list[i][0]))
+       # apply translation to all the capsule :
+      if pretty :
+        self.client.gui.applyConfiguration(nameRod,[(q_list[0][0]/2)+q_list[0][1]] + q_list[0][2:8])
       self.client.gui.refresh()
-      
       return True
         
         
