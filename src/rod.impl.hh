@@ -29,16 +29,27 @@
 namespace hpp {
   namespace flecto {
     namespace impl {
+      typedef osg::Vec3f::value_type value_type;
       class Rod : public virtual POA_hpp::corbaserver::flecto::Rod
       {
           private:
-            std::map<std::string,hpp::flecto::NodeRod> rods_;
+            std::map<std::string,NodeRodPtr_t> rods_; // contient la liste des rod créé et pour chacun la liste des capsules qu'il possède
           public:
             Rod ();
-
             hpp::floatSeqSeq* convertAtoQ (const hpp::floatSeq& a) throw (hpp::Error);
 
-            virtual bool createRod(const char* rodNameCorba)throw (hpp::Error);
+            virtual bool createRod(const char* rodNameCorba,const value_type *colorCorba,float radius,float totalLength,short maxCapsules)throw (hpp::Error);
+
+            virtual char* getRodCapsule(const char* rodNameCorba,short i) throw (hpp::Error);
+
+            virtual float getRodRadius(const char* rodNameCorba) throw(hpp::Error);
+
+            virtual float getRodTotalLength(const char* rodNameCorba) throw(hpp::Error);
+
+            virtual short getRodMaxCapsule(const char* rodNameCorba) throw(hpp::Error);
+
+            virtual hpp::floatSeq* convertToOSG(const hpp::floatSeq& q, float length) throw(hpp::Error);
+
 
            // void setProblemSolver (const ProblemSolverPtr_t& problemSolver);
       }; // class rod

@@ -10,14 +10,33 @@ module hpp {
   /// Robot configuration is defined by a sequence of dof value.
   typedef sequence<float> floatSeq;
   typedef sequence<floatSeq> floatSeqSeq;
-
+  typedef float Color [4];
+  
+  
   module corbaserver {
   module flecto {
   interface Rod {
     /// convert a vector in R6 to an array of capsules (geometry of the rod)
     floatSeqSeq convertAtoQ (in floatSeq a) raises (Error);
-  }; //interface Problem
-  }; // module wholebody_step
+    
+    /// create a new rod 
+    boolean createRod(in string rodNameCorba, in Color colorCorba,in float radius,in float totalLength,in short maxCapsules)raises (Error);
+    
+   // boolean setDisplayedChild(in string rodName, in long i) raises (Error);
+    
+    float getRodRadius(in string rodNameCorba)raises (Error);
+    
+    float getRodTotalLength(in string rodNameCorba)raises (Error);
+     
+    short getRodMaxCapsule(in string rodNameCorba)raises (Error);
+    
+    string getRodCapsule(in string rodNameCorba,in short index) raises (Error);
+    
+    // converti model "math" d une capsule vers parametrisation de OSG : capsule selon Z+ et origine au centre
+    floatSeq convertToOSG(in floatSeq q,in float length) raises(Error);
+    
+  }; //interface rod
+  }; // module flecto
   }; // module corbaserver
 }; // module hpp
 

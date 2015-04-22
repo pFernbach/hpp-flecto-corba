@@ -4,9 +4,19 @@ namespace hpp{
 namespace flecto {
 
 
-    NodeRod::NodeRod (const std::string& name):
-        graphics::GroupNode (name), list_of_objects_()
+    NodeRod::NodeRod (const std::string& name, osgVector4 color, float radius, float totalLength,int maxCapsule): list_of_capsule_()
     {
+        name_ = name;
+        radius_ = radius;
+        totalLength_ = totalLength;
+        color_ = osgVector4(color);
+        maxCapsule_=maxCapsule;
+        for (int i = 0; i< maxCapsule ; i++){
+            std::stringstream nameCap;
+            nameCap << name << "_cap"<<i;
+            list_of_capsule_.push_back(nameCap.str());
+            //std::cout<<"add : "<< nameCap.str();
+        }
     }
 
     void NodeRod::initWeakPtr(NodeRodWeakPtr other_weak_ptr)
@@ -18,9 +28,9 @@ namespace flecto {
     //------- public :-------
 
 
-    NodeRodPtr_t NodeRod::create(const std::string& name)
+    NodeRodPtr_t NodeRod::create(const std::string& name,osgVector4 color, float radius, float totalLength,short maxCapsule)
     {
-        NodeRodPtr_t shared_ptr(new NodeRod(name));
+        NodeRodPtr_t shared_ptr(new NodeRod(name,color,radius,totalLength,maxCapsule));
 
         // Add reference to itself
         shared_ptr->initWeakPtr(shared_ptr);
@@ -29,28 +39,15 @@ namespace flecto {
     }
 
 
-    bool NodeRod::addChild (graphics::LeafNodeCapsulePtr_t child_ptr)
-    {
-        list_of_objects_.push_back(child_ptr);
-        this->asQueue()->addChild(child_ptr->asGroup());
-        return true;
-    }
 
-    bool NodeRod::removeChild (graphics::LeafNodeCapsulePtr_t child_ptr)
+    char* NodeRod::getCapsule(int i)
     {
-        list_of_objects_.remove(child_ptr);
-        return this->asQueue()->removeChild(this->asQueue()->getChildIndex(child_ptr->asGroup()));
-    }
 
+        const std::string& str = list_of_capsule_.at(i);
+        char* name = new char[str.length ()+1];
+        strcpy (name, str.c_str ());
 
-    graphics::LeafNodeCapsulePtr_t NodeRod::getChild(size_t i)
-    {
-       std::list<graphics::LeafNodeCapsulePtr_t>::const_iterator it = list_of_objects_.begin();
-       if (list_of_objects_.size() > i)
-       {
-           std::advance(it, i);
-       }
-       return *it;
+        return name;
     }
 
 } // namespace flecto

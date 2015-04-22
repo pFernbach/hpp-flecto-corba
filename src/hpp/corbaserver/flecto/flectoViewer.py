@@ -31,3 +31,41 @@ class FlectoViewer(Viewer):
       q_list = self.rod.convertAtoQ(args)
       # recup chaque capsule dans la liste et la display avec self.client.gui
 
+
+    def createRod(self,nameRod,color,radius,totalLength,maxCaspule):
+      self.rod.createRod(nameRod,color,radius,totalLength,maxCaspule)
+      self.client.gui.createGroup(nameRod)
+      totalLength = totalLength +0.0 #cast to float
+      for i in range(0,self.rod.getRodMaxCapsule(nameRod)) :
+        self.client.gui.addCapsule(self.rod.getRodCapsule(nameRod,i),radius,(totalLength/maxCaspule),color)
+        self.client.gui.addToGroup(self.rod.getRodCapsule(nameRod,i),nameRod)   
+      self.client.gui.addToGroup(nameRod,self.sceneName)
+      return True
+        
+        
+    def applyRodConfiguration(self,nameRod,q_list):
+      self.setDisplayedCapsule(nameRod,len(q_list))
+      length = (self.rod.getRodTotalLength(nameRod) +0.0)/self.rod.getRodMaxCapsule(nameRod)
+      
+      for i in range (0,len(q_list)):
+        self.client.gui.applyConfiguration(self.rod.getRodCapsule(nameRod,i),self.rod.convertToOSG(q_list[i],length))
+      self.client.gui.refresh()
+      
+      return True
+        
+        
+    # set visibility On for all capsule before index, and off for all capsule after index
+    def setDisplayedCapsule(self,nameRod,index):
+      if index>self.rod.getRodMaxCapsule(nameRod):
+        return False
+      for i in range(0,index):
+        self.client.gui.setVisibility(self.rod.getRodCapsule(nameRod,i),"ON")
+      for i in range (index,self.rod.getRodMaxCapsule(nameRod)):
+        self.client.gui.setVisibility(self.rod.getRodCapsule(nameRod,i),"OFF")
+      return True
+      
+      
+      
+      
+      
+        
