@@ -33,7 +33,7 @@ class Client(object):
   """
   Connect and create clients for hpp-flecto-planner library.
   """
-  def __init__(self,viewer):
+  def __init__(self):
     """
     Initialize CORBA and create default clients.
     """

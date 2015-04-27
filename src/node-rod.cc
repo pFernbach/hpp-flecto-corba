@@ -13,7 +13,7 @@ namespace flecto {
         maxCapsule_=maxCapsule;
         for (int i = 0; i< maxCapsule ; i++){
             std::stringstream nameCap;
-            nameCap << name << "_cap"<<i;
+            nameCap << name << "/cap"<<i;
             list_of_capsule_.push_back(nameCap.str());
             //std::cout<<"add : "<< nameCap.str();
         }
