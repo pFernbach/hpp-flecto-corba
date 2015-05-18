@@ -4,6 +4,8 @@
 #include <gepetto/viewer/group-node.h>
 #include <gepetto/viewer/leaf-node-capsule.h>
 #include <gepetto/viewer/config-osg.h>
+#include <qserl/rod3d/rod.h>
+# include "Rod.hh"
 
 namespace hpp{
 namespace flecto {
@@ -21,6 +23,7 @@ namespace flecto {
             float totalLength_;
             short maxCapsule_;
             std::string name_;
+            qserl::rod3d::RodShPtr rod_; // object rod from qserl
 
         protected:
             NodeRod(const std::string& name,osgVector4 color, float radius, float totalLength, int maxCapsule);
@@ -28,6 +31,8 @@ namespace flecto {
             static NodeRodPtr_t create(const std::string& name,osgVector4 color, float radius, float totalLength,short maxCapsule);
 
             virtual char *getCapsule(int i);
+
+            virtual hpp::floatSeqSeq* convertAtoQ (const hpp::floatSeq& a);
 
 
             float radius(){

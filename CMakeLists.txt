@@ -33,6 +33,7 @@ ADD_REQUIRED_DEPENDENCY("hpp-template-corba >= 1.1")
 ADD_REQUIRED_DEPENDENCY("hpp-util >= 3")
 ADD_REQUIRED_DEPENDENCY("eigen3 >= v3.0.5")
 
+find_package(qserl)
 # This dependency ensures us that the intermediate __init__.py files are
 # already installed.
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 2.1")

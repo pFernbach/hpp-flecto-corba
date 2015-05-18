@@ -32,21 +32,23 @@ namespace hpp {
 
     Rod::Rod():rods_()
     {
+
     }
 
 
     //TODO methode avec qSerl :
-    hpp::floatSeqSeq* Rod::convertAtoQ (const hpp::floatSeq& a) throw (hpp::Error)
+    hpp::floatSeqSeq* Rod::convertAtoQ (const char* rodNameCorba,const hpp::floatSeq& a) throw (hpp::Error)
     {
-      hpp::floatSeqSeq* q;
       try {
+          const std::string rodName (rodNameCorba);
           std::cout<<"test interface python"<<std::endl;
-
+          NodeRodPtr_t rod = rods_[rodName];
+          return rod->convertAtoQ(a);
         // cf problem.impl::nodes() pour utiliser les floatseq
       } catch (const std::exception& exc) {
         throw hpp::Error (exc.what ());
+        return 0;
       }
-      return q;
     }
 
     bool Rod::createRod (const char* rodNameCorba, const value_type *colorCorba, float radius, float totalLength, short maxCapsules)throw (Error)

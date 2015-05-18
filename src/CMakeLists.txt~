@@ -60,6 +60,13 @@ INSTALL(
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/__init__.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/flecto
   )
+  
+  install (FILES
+  hpp/corbaserver/rod/robot_rod.py
+  hpp/corbaserver/rod/__init__.py
+  DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/rod)
+  
+  
 INSTALL(
   FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/hpp/corbaserver/flecto/client.py
@@ -73,7 +80,7 @@ INSTALL(
 #  )
 # Standalone corba server
 ADD_EXECUTABLE (hpp-flecto-server hpp-flecto-corba.cc)
-TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME})
+TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME} )
 #PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-flecto)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-corbaserver)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server gepetto-viewer)

@@ -80,7 +80,8 @@ INSTALL(
 #  )
 # Standalone corba server
 ADD_EXECUTABLE (hpp-flecto-server hpp-flecto-corba.cc)
-TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME})
+TARGET_LINK_LIBRARIES (hpp-flecto-server ${LIBRARY_NAME} )
+TARGET_LINK_LIBRARIES (hpp-flecto-server /local/dev_hpp/install/lib/libqserl.a)
 #PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-flecto)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server hpp-corbaserver)
 PKG_CONFIG_USE_DEPENDENCY(hpp-flecto-server gepetto-viewer)
