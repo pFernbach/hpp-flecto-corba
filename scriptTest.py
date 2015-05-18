@@ -10,7 +10,7 @@ white=[1.0,1.0,1.0,1.0]
 green=[0.23,0.75,0.2,0.5]
 yellow=[0.85,0.75,0.15,0.5]
 
-robot = Robot ('robot_rod',False)
+robot = Robot ('robot_rod')
 robot.tf_root = 'base_link'
 #robot.setJointBounds ("base_joint_xyz", [-10,10,-10,10, 0.5, 0.5])	
 #robot.setJointBounds ("base_joint_xyz", [-5,4,-7,5,0.5,0.5])
