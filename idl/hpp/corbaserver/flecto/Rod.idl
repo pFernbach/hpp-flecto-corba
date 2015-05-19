@@ -17,7 +17,7 @@ module hpp {
   module flecto {
   interface Rod {
     /// convert a vector in R6 to an array of capsules (geometry of the rod)
-    floatSeqSeq convertAtoQ (in string rodNameCorba,in floatSeq a) raises (Error);
+    floatSeqSeq wrenchToGeometry (in string rodNameCorba,in floatSeq a) raises (Error);
     
     /// create a new rod 
     boolean createRod(in string rodNameCorba, in Color colorCorba,in float radius,in float totalLength,in short maxCapsules)raises (Error);

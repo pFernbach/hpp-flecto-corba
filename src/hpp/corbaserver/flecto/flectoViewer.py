@@ -52,11 +52,11 @@ class FlectoViewer(Viewer):
       for i in range (0,len(q_list)):
         self.client.gui.resizeCapsule(self.robot.rod.getRodCapsule(nameRod,i),q_list[i][0])
         #self.client.gui.setScale(self.rod.getRodCapsule(nameRod,i),[1,1]+[q_list[i][0]])
-        if pretty == True :
+        if pretty == True : # smooth the display 
           self.client.gui.applyConfiguration(self.robot.rod.getRodCapsule(nameRod,i),self.robot.rod.convertToOSG(q_list[i][1:8],0))
-        else: 
+        else: # real position of the capsule (as send to fcl for collision check)
           self.client.gui.applyConfiguration(self.robot.rod.getRodCapsule(nameRod,i),self.robot.rod.convertToOSG(q_list[i][1:8],q_list[i][0]))
-       # apply translation to all the capsule :
+       # apply translation to the first capsule (half-length) :
       if pretty :
         self.client.gui.applyConfiguration(nameRod,[(q_list[0][0]/2)+q_list[0][1]] + q_list[0][2:8])
       #self.client.gui.refresh()

@@ -24,7 +24,8 @@ namespace flecto {
             short maxCapsule_;
             std::string name_;
             qserl::rod3d::RodShPtr rod_; // object rod from qserl
-
+            qserl::rod3d::WorkspaceIntegratedState::IntegrationOptions integrationOptions;
+            const Eigen::Displacementd rodBasePosition;
         protected:
             NodeRod(const std::string& name,osgVector4 color, float radius, float totalLength, int maxCapsule);
         public:
@@ -32,7 +33,7 @@ namespace flecto {
 
             virtual char *getCapsule(int i);
 
-            virtual hpp::floatSeqSeq* convertAtoQ (const hpp::floatSeq& a);
+            virtual hpp::floatSeqSeq* wrenchToGeometry (const hpp::floatSeq& a);
 
 
             float radius(){

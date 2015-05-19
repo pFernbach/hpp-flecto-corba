@@ -37,13 +37,12 @@ namespace hpp {
 
 
     //TODO methode avec qSerl :
-    hpp::floatSeqSeq* Rod::convertAtoQ (const char* rodNameCorba,const hpp::floatSeq& a) throw (hpp::Error)
+    hpp::floatSeqSeq* Rod::wrenchToGeometry (const char* rodNameCorba,const hpp::floatSeq& a) throw (hpp::Error)
     {
       try {
           const std::string rodName (rodNameCorba);
-          std::cout<<"test interface python"<<std::endl;
           NodeRodPtr_t rod = rods_[rodName];
-          return rod->convertAtoQ(a);
+          return rod->wrenchToGeometry(a);
         // cf problem.impl::nodes() pour utiliser les floatseq
       } catch (const std::exception& exc) {
         throw hpp::Error (exc.what ());

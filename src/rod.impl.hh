@@ -36,7 +36,7 @@ namespace hpp {
             std::map<std::string,NodeRodPtr_t> rods_; // contient la liste des rod créé et pour chacun la liste des capsules qu'il possède
           public:
             Rod ();
-            hpp::floatSeqSeq* convertAtoQ (const char *rodNameCorba, const floatSeq &a) throw (hpp::Error);
+            hpp::floatSeqSeq* wrenchToGeometry (const char *rodNameCorba, const floatSeq &a) throw (hpp::Error);
 
             virtual bool createRod(const char* rodNameCorba,const value_type *colorCorba,float radius,float totalLength,short maxCapsules)throw (hpp::Error);
 
