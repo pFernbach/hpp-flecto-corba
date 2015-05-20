@@ -25,7 +25,7 @@ int main (int argc, char* argv[])
     fcl::Transform3f mat;
     mat.setIdentity ();
     // add joints freeflyer
- /*
+
     hpp::model::JointPtr_t baseJoint, rootJoint; // architecture : baseJoint->So3Joint->RodJoint
 
     baseJoint = objectFactory.createJointTranslation3 (mat);
@@ -42,17 +42,17 @@ int main (int argc, char* argv[])
     rootJoint = objectFactory.createJointSO3 (mat);
     rootJoint->name ("base_joint_SO3");
     baseJoint->addChildJoint (rootJoint);
-*/
+
 
     // add Joint Anchor :
-
+/*
     hpp::model::JointPtr_t rootJoint;
 
     rootJoint = objectFactory.createJointAnchor (mat);
     rootJoint->name ("anchorJoint");
     device->rootJoint (rootJoint);
 
-
+*/
     //add joint rod :
     fcl::Transform3f matRod;
     matRod.setIdentity ();
